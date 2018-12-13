@@ -12,6 +12,8 @@
 
 # Package Files #
 *.jar
+# but not vendored libraries
+!lib/*
 *.war
 *.nar
 *.ear
