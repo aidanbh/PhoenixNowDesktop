@@ -1,0 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package phoenixnowdesktop;
+
+/**
+ *
+ * @author aidanhunt
+ */
+public final class Constants {
+    // no need for security as an attacker couldn't do anything malicious with this info
+    // and we always use unique passwords right?
+
+    public static final String EMAIL = "";
+    public static final String PASS = "";
+
+    public static final String HOST = "phoenixnow.org";
+
+}
