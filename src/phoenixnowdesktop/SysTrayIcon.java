@@ -124,8 +124,6 @@ public final class SysTrayIcon extends TrayIcon {
 
     void updateSignInState(boolean state) {
 
-        /* d */ System.out.println("The windows tells me: " + state);
-
         // update the checkbox
         this.isSignedInCB.setState(state);
 
@@ -150,7 +148,6 @@ public final class SysTrayIcon extends TrayIcon {
         public void actionPerformed(ActionEvent e) {
             switch (e.getActionCommand()) {
                 case "signinitemclick":
-                    /* d */ System.out.println("Signin Menu Item Clicked...");
                     // let the window handle the signin
                     window.doSignIn(); // which will call back here to update stuff
                     // we only want this if the user initated a signin here (to increase visiblity

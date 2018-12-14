@@ -25,6 +25,11 @@ import java.io.IOException;
 /**
  * @author aidanhunt
  */
+
+enum SignInState {
+    SIGNED_IN, OFF_CAMPUS, UNKNOWN;
+}
+
 class BackendHtmlUnit {
 
     private final String host;

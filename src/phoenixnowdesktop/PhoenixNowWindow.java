@@ -95,7 +95,7 @@ public class PhoenixNowWindow extends java.awt.Frame {
             ));
         } else {
             // turn on a a retry timer -- just one, as this code will run again
-            System.out.println("Trying atain in 5 minutes");
+            System.out.println("Trying again in 5 minutes");
             (new Timer()).schedule(new DSITask(), Date.from(
                     ZonedDateTime.now(this.server_time)
                             .plusMinutes(5)
