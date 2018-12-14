@@ -31,6 +31,7 @@ public final class SysTrayIcon extends TrayIcon {
 
     private PopupMenu menu;
 
+    // ref to main window
     private PhoenixNowWindow window;
 
     private CheckboxMenuItem isSignedInCB;
@@ -74,14 +75,15 @@ public final class SysTrayIcon extends TrayIcon {
 
         // register the menu
         super.setPopupMenu(this.menu);
-        
+
         // and handle clicks on ourself
         super.setActionCommand("iconclick");
         super.addActionListener(new ActionsListener());
 
         // get the initial state -- this fixes the icon
-        this.updateSignInState(window.askIsSignedIn());
-
+        // this.updateSignInState(window.askIsSignedIn());
+        // actually, don't do that -- it makes a false notification
+        // because window hasn't attempted a signin yet
     }
 
     private void setImage(String name) {
@@ -96,7 +98,7 @@ public final class SysTrayIcon extends TrayIcon {
     private PopupMenu setupPopupMenu() {
         PopupMenu pm = new PopupMenu();
         // make things visible on my hidpi display
-        pm.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        pm.setFont(new Font("SansSerif", Font.PLAIN, 18));
 
         // add application info
         pm.add(new MenuItem("PhoenixNow Desktop"));
@@ -127,11 +129,18 @@ public final class SysTrayIcon extends TrayIcon {
         // update the checkbox
         this.isSignedInCB.setState(state);
 
+        // notifications
+        // always send the positive notification -- it's the logic in window
+        // of disabling the timers on success that prevents constant popups
+        if (state) {
+            this.displayMessage("PhoenixNow -- Signed In", "You have signed in for today!", MessageType.INFO);
+        }
+
         // and the icon
         if (state) {
-            this.setImage("phoenixnowlogo_check.png");
+            this.setImage("checkmark.png");
         } else {
-            this.setImage("phoenixnowlogo_x.png");
+            this.setImage("phoenixnowlogo.png");
         }
     }
 
@@ -144,11 +153,17 @@ public final class SysTrayIcon extends TrayIcon {
                     /* d */ System.out.println("Signin Menu Item Clicked...");
                     // let the window handle the signin
                     window.doSignIn(); // which will call back here to update stuff
+                    // we only want this if the user initated a signin here (to increase visiblity
+                    // otherwise, there will be a lot of obnoxious notifications if the program is running
+                    // before the user is on campus for the day
+                    if (!window.askIsSignedIn()) {
+                        displayMessage("PhoenixNow -- Error", "You could not be signed in. Make sure you are connected to the school network.", MessageType.ERROR);
+                    }
                     break;
                 case "iconclick":
                     window.showMe();
                     break;
-               case "hardexit":
+                case "hardexit":
                     System.exit(0);
                     break;
                 default:
