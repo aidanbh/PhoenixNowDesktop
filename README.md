@@ -3,7 +3,7 @@
 This program is an unofficial cross-platform client for the open-source [PhoenixNow IP-based attendance system](https://github.com/ECGHelloWorld/PhoenixNow), used by the Early College at Guilford uppperclassmen to register attendance at Guilford for GCS attendance purposes.
 
 #### Instructions
-Clone the project, fill in the username and password in `src/phoenixnowdesktop/Constants.java.sample` and move it to `Constants.java` in that directory and build the project with NetBeans.
+Clone the repository and build the project with NetBeans. Ensure that the environment variables `PHOENIXNOW_EMAIL` and `PHOENIXNOW_PASSWORD` (and optionally `PHOENIXNOW_HOST`, default is `phoenixnow.org`), are set appropriately. A logout and back in may be required on some platforms for env vars to take effect.
 
 #### Requirements
 The latest version of the Oracle Java SE 8 Java Runtime Environment must be installed. The system should support the Java AWT SystemTray interface for full functionality. Obviously, a connection (Internet or otherwise) to the PhoenixNow server is required.
